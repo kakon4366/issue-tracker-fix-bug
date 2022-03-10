@@ -21,24 +21,19 @@ function submitIssue(e) {
   e.preventDefault();
 }
 
-const closeIssue = id => {
+const setStatusClosed = id => {
   const issues = JSON.parse(localStorage.getItem('issues'));
-  const currentIssue = issues.find(issue => issue.id === id);
+  const currentIssue = issues.find(issue => issue.id === id + '');
   currentIssue.status = 'Closed';
   localStorage.setItem('issues', JSON.stringify(issues));
   fetchIssues();
 }
 
 const deleteIssue = id => {
-  // const issues = JSON.parse(localStorage.getItem('issues'));
-  // const remainingIssues = issues.filter( issue => issue.id !== id );
-  // localStorage.setItem('issues', JSON.stringify(remainingIssues));
   const issues = JSON.parse(localStorage.getItem('issues'));
   const remainingIssues = issues.filter(issue => issue.id !== id + '');
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
-
-  const issuesList = document.getElementById('issuesList');
-  issuesList.innerHTML = '';
+  fetchIssues();
 }
 
 const fetchIssues = () => {
